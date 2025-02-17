@@ -5,9 +5,9 @@ import {
     NavbarLeft,
     NavbarRight,
 } from "@/components/ui/navbar";
+import { Link } from '@/i18n/routing';
 import { TreeDeciduousIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 export default function NavbarSection() {
     const t = useTranslations("NavbarSection");
@@ -26,11 +26,8 @@ export default function NavbarSection() {
                         </Link>
                     </NavbarLeft>
                     <NavbarRight>
-                        <Link href="/" className="hidden text-sm md:block">
-                            {t("signIn")}
-                        </Link>
                         <Button variant="default" asChild>
-                            <Link href="/">{t("getStarted")}</Link>
+                            <Link href="/login">{t("getStarted")}</Link>
                         </Button>
                         <LangSwitch />
                     </NavbarRight>

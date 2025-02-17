@@ -42,19 +42,11 @@ export type createMemberType = {
   spouse_id: number | null;
 };
 
-// export type GraphData = {
-//   familyName: string;
-//   familyHead: string;
-//   data: GraphNode[];
-// };
-// export type GraphNode = {
-//   index: number;
-//   position: string;
-//   name: string;
-//   spouse: string;
-//   gender: string;
-//   children: GraphNode[];
-// };
+export type fullMember = MemberType & {
+  father: MemberType;
+  mother: MemberType;
+  spouse: MemberType;
+};
 
 export interface FamilyTreeNode {
   id: number;

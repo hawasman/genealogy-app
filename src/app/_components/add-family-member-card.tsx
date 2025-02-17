@@ -1,5 +1,8 @@
 'use client'
 
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { createMember } from "@/server/actions/family-actions";
 import { useState } from "react";
 
@@ -36,20 +39,20 @@ export const AddFamilyMemberCard = ({ familyId, onAdd }: { familyId: number, onA
                 className="flex flex-col items-center justify-center gap-4"
             >
                 <div className="flex items-center justify-center gap-2">
-                    <InputText type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
+                    <Input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <InputText type="number" name="fatherId" id="fatherId" value={fatherId?.toString()} onChange={(e) => setFatherId(parseInt(e.target.value))} placeholder="father" />
+                    <Input type="number" name="fatherId" id="fatherId" value={fatherId?.toString()} onChange={(e) => setFatherId(parseInt(e.target.value))} placeholder="father" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <InputText type="number" name="motherId" id="motherId" value={motherId?.toString()} onChange={(e) => setMotherId(parseInt(e.target.value))} placeholder="mother" />
+                    <Input type="number" name="motherId" id="motherId" value={motherId?.toString()} onChange={(e) => setMotherId(parseInt(e.target.value))} placeholder="mother" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <InputText type="number" name="spouseId" id="spouseId" value={spouseId?.toString()} onChange={(e) => setSpouseId(parseInt(e.target.value))} placeholder="spouse" />
+                    <Input type="number" name="spouseId" id="spouseId" value={spouseId?.toString()} onChange={(e) => setSpouseId(parseInt(e.target.value))} placeholder="spouse" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <Dropdown options={[{ name: "Male", value: "male" }, { name: "Female", value: "female" }]} value={gender} onChange={(e: { value: string }) => setGender(e.value as "male" | "female")} name="gender" optionLabel="name"
-                        placeholder="Gender" className="w-full md:w-14rem" />
+                    {/* <Dropdown options={[{ name: "Male", value: "male" }, { name: "Female", value: "female" }]} value={gender} onChange={(e: { value: string }) => setGender(e.value as "male" | "female")} name="gender" optionLabel="name"
+                        placeholder="Gender" className="w-full md:w-14rem" /> */}
                 </div>
                 <Button type="submit">Add Member</Button>
             </form>

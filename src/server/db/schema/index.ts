@@ -1,4 +1,4 @@
 import * as authSchema from "./auth-schema";
-import * as schema from "./schema";
+import * as familySchema from "./schema";
 
-export { authSchema, schema };
+export const schema = { ...authSchema, ...familySchema };

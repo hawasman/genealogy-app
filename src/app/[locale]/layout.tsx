@@ -13,13 +13,23 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function RootLayout({
-  children,
-  params: { locale }
-}: Readonly<{
-  children: React.ReactNode,
-  params: { locale: string };
-}>) {
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode,
+    params: { locale: string };
+  }>
+) {
+  // eslint-disable-next-line @typescript-eslint/await-thenable
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as "ar" | "en")) {
     notFound();

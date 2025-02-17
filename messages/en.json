@@ -45,6 +45,53 @@
   },
   "auth": {
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "logout": "Logout"
+  },
+  "sidebar": {
+    "familyTree": "Family Tree",
+    "members": "Members",
+    "graph": "Graph"
+  },
+  "treePage": {
+    "Table": {
+      "Columns": {
+        "name": "Name",
+        "gender": "Gender",
+        "father": "Father",
+        "mother": "Mother",
+        "spouse": "Spouse",
+        "nodata": "Unknown",
+        "male": "Male",
+        "female": "Female"
+      },
+      "page": {
+        "no-result": "No results."
+      }
+    },
+    "family-members": "Family Members",
+    "add-member": "Add Member"
+  },
+  "general": {
+    "columnHeader": {
+      "asc": "Asc",
+      "dsc": "Dsc",
+      "hide": "Hide"
+    },
+    "pagination": {
+      "rowSelected": "row(s) selected.",
+      "rows-per-page": "Rows per page",
+      "pagesPerTable": "Page",
+      "pagesLeft": "of",
+      "go-to-first-page": "Go to first page",
+      "go-to-previous-page": "Go to previous page",
+      "go-to-next-page": "Go to next page",
+      "go-to-last-page": "Go to last page"
+    }
+  },
+  "TreePage": {
+    "family-members": "Family Members",
+    "add-member": "Add a Member",
+    "add-member-description": "Add a new member to your family"
   }
 }

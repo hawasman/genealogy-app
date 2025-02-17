@@ -1,5 +1,8 @@
 'use client'
 
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { createFamily } from "@/server/actions/family-actions";
 import { useState } from "react";
 
@@ -28,20 +31,15 @@ export const AddFamilyCard = ({ onAdd }: { onAdd: () => void }) => {
             className="flex flex-col items-center justify-center gap-4"
         >
             <div className="flex items-center justify-center gap-2">
-                <InputText type="text" name="familyName" id="familyName" value={familyName} onChange={(e) => setFamilyName(e.target.value)} placeholder="Family name" />
+                <Input type="text" name="familyName" id="familyName" value={familyName} onChange={(e) => setFamilyName(e.target.value)} placeholder="Family name" />
             </div>
 
             <div className="flex items-center justify-center gap-2">
-                <InputText type="text" name="headName" id="headName" value={headName} onChange={(e) => setHeadName(e.target.value)} placeholder="Head name" />
+                <Input type="text" name="headName" id="headName" value={headName} onChange={(e) => setHeadName(e.target.value)} placeholder="Head name" />
             </div>
             <div className="flex items-center justify-center gap-2">
-                <Dropdown options={[{ name: "Male", value: "male" }, { name: "Female", value: "female" }]} value={gender} onChange={(e: { value: string }) => setGender(e.value)} name="gender" optionLabel="name"
-                    placeholder="Gender" className="w-full md:w-14rem" />
-                {/* <label htmlFor="gender">Gender:</label>
-                <select name="gender" id="gender">
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select> */}
+                {/* <Dropdown options={[{ name: "Male", value: "male" }, { name: "Female", value: "female" }]} value={gender} onChange={(e: { value: string }) => setGender(e.value)} name="gender" optionLabel="name"
+                    placeholder="Gender" className="w-full md:w-14rem" /> */}
             </div>
             <Button type="submit">Add family</Button>
         </form>

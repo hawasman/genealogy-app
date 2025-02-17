@@ -45,6 +45,51 @@
   },
   "auth": {
     "signIn": "تسجيل الدخول",
-    "signUp": "انشاء حساب جديد"
+    "signUp": "انشاء حساب جديد",
+    "logout": "تسجيل الخروج"
+  },
+  "sidebar": {
+    "familyTree": "شجرة العائلة",
+    "members": "افراد العائلة",
+    "graph": "مخطط شجرة العائلة"
+  },
+  "treePage": {
+    "Table": {
+      "Columns": {
+        "name": "الاسم",
+        "gender": "الجنس",
+        "father": "الاب",
+        "mother": "الام",
+        "spouse": "الزوج/ة",
+        "nodata": "غير معروف",
+        "male": "ذكر",
+        "female": "انثى"
+      },
+      "page": {
+        "no-result": "لا توجد بيانات"
+      }
+    }
+  },
+  "general": {
+    "columnHeader": {
+      "asc": "تنازلي",
+      "dsc": "تصاعدي",
+      "hide": "اخفاء"
+    },
+    "pagination": {
+      "rowSelected": "حقل مختار",
+      "rows-per-page": "حقل في الصفحة",
+      "pagesPerTable": "صفحة",
+      "pagesLeft": "من",
+      "go-to-first-page": "الصفحة الاولى",
+      "go-to-previous-page": "الصفحة السابقة",
+      "go-to-next-page": "الصفحة التالية",
+      "go-to-last-page": "الصحفة الاخيرة"
+    }
+  },
+  "TreePage": {
+    "family-members": "افراد العائلة",
+    "add-member": "اضف فرد جديد",
+    "add-member-description": "اضف فرد جديد لشجرة عائلتك"
   }
 }

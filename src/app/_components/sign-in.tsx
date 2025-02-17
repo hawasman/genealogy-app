@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { signIn } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -18,6 +18,7 @@ export default function SignIn() {
     const [loading, setLoading] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const t = useTranslations("SignIn");
+    const locale = useLocale();
     return (
         <Card className="max-w-md">
             <CardHeader>
@@ -104,7 +105,7 @@ export default function SignIn() {
                             onClick={async () => {
                                 await signIn.social({
                                     provider: "google",
-                                    callbackURL: "/dashboard"
+                                    callbackURL: `/${locale}/dashboard`,
                                 });
                             }}
                         >

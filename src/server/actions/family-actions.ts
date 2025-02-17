@@ -3,6 +3,7 @@
 import {
   type createMemberType,
   type FamilyTree,
+  type fullMember,
   type MemberWithChildren,
 } from "@/utils/types";
 import { eq, or, sql } from "drizzle-orm";
@@ -71,7 +72,25 @@ export const getChildren = async (memberId: number | undefined) => {
   return result;
 };
 
-export const getFamilyMembers = async (id: number) => {
+export const getFamilyMembers = async (familyId: number) => {
+  const result = await db.query.members.findMany({
+    with: {
+      father: {
+        columns: { id: true, name: true },
+      },
+      mother: {
+        columns: { id: true, name: true },
+      },
+      spouse: {
+        columns: { id: true, name: true },
+      },
+    },
+    where: eq(members.family_id, familyId),
+  });
+  return result as fullMember[];
+};
+
+export const getFamilyMembersWithChildren = async (id: number) => {
   const result: MemberWithChildren[] = await db.query.members.findMany({
     with: {
       family: {
@@ -155,7 +174,7 @@ export const createMember = async (
 };
 
 export const getFamilyTree = async (family_id: number) => {
-  const familyMembers = await getFamilyMembers(family_id);
+  const familyMembers = await getFamilyMembersWithChildren(family_id);
 
   const familyTree: FamilyTree[] = [];
 
@@ -367,4 +386,35 @@ export async function buildFamilyTree(
     console.error("Error:", error);
     throw error; // Re-throw the error for handling elsewhere
   }
+}
+
+export async function getPaternalLineageNames(
+  familyId: number,
+): Promise<{ name: string; gender: string; id: number }[]> {
+  const sqlQuery = sql`
+    SELECT
+        m.id AS member_id,
+        m.gender AS gender,
+        CASE
+            WHEN gf.name IS NOT NULL THEN m.name || ' ' || f.name || ' ' || gf.name
+            WHEN f.name IS NOT NULL THEN m.name || ' ' || f.name
+            ELSE m.name
+        END AS full_name
+    FROM
+        genealogy_app_member m
+    LEFT JOIN
+        genealogy_app_member f ON m.father_id = f.id
+    LEFT JOIN
+        genealogy_app_member gf ON f.father_id = gf.id
+    WHERE
+    m.family_id = ${familyId}
+  `;
+
+  const result = await db.execute(sqlQuery);
+  const formattedResult = result.map((row) => ({
+    name: row.full_name as string,
+    gender: row.gender as string,
+    id: row.member_id as number,
+  }));
+  return formattedResult;
 }
