@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: genealogy-app-postgres
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 3tExHXzG_Qid6nWX
+      POSTGRES_DB: genealogy-app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - db
+
+  pgvector:
+    image: pgvector/pgvector:latest
+    depends_on:
+      - db
+    environment:
+      PGVECTOR_DB: genealogy-app
+      PGVECTOR_USER: postgres
+      PGVECTOR_PASSWORD: 3tExHXzG_Qid6nWX
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: genealogy-app-adminer
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    networks:
+      - db
+
+networks:
+  db:
+
+volumes:
+  pgdata:
+    driver: local

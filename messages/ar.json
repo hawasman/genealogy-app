@@ -1,0 +1,50 @@
+{
+  "HomePage": {
+    "title": "مرحبا",
+    "about": "الذهاب للصفحة الشائعة"
+  },
+  "HeroSection": {
+    "title": "استكشف اصولك",
+    "description": "استكشف نسبك وتفاصيل عائلتك وتصور لشجرتك العائلية.",
+    "getStartedBtn": "ابدأ الان"
+  },
+  "NavbarSection": {
+    "title": "منساب",
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "getStarted": "ابدأ الان"
+  },
+  "locale": {
+    "arabic": "العربية",
+    "english": "الانجليزي"
+  },
+  "SignUp": {
+    "description": "ادخل بياناتك لانشاء حساب",
+    "title": "انشاء حساب جديد",
+    "fullname": "الاسم الكامل",
+    "fullnamePlaceholder": "محمد احمد",
+    "email": "الايميل",
+    "password": "كلمة المرور",
+    "confirmPassword": "تاكيد كلمة المرور",
+    "profileImage": "الصورة الشخصية (اختياري)",
+    "submit": "انشاء الحساب"
+  },
+  "SignIn": {
+    "title": "تسجيل دخول",
+    "description": "ادخل ايميلك تحت لتسجيل دخولك",
+    "email": "الايميل",
+    "password": "كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "signIn": "الدخول",
+    "signInWithGoogle": "تسجيل الدخول بGoogle",
+    "signInWithGithub": "تسجيل الدخول بGithub"
+  },
+  "auth": {
+    "signIn": "تسجيل الدخول",
+    "signUp": "انشاء حساب جديد"
+  }
+}

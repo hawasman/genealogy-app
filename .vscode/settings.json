@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.editor.customLabels.patterns": {
+    "**/**.ts": "${dirname}/${filename}", // route.ts
+    "**/**.tsx": "${dirname}/${filename}" // layout.tsx, page.tsx, template.tsx
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always",
+    "source.removeUnusedImports": "always"
+  },
+  "cSpell.words": ["primereact", "unixepoch"],
+  "i18n-ally.localesPaths": ["messages", "src/i18n"],
+  "i18n-ally.keystyle": "nested"
+}

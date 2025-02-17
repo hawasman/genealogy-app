@@ -1,0 +1,50 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "HeroSection": {
+    "title": "Discover Your Family History",
+    "description": "Explore your ancestors, family details, and lineage visualization.",
+    "getStartedBtn": "Get Started"
+  },
+  "NavbarSection": {
+    "title": "Minsab",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "getStarted": "Get Started"
+  },
+  "locale": {
+    "english": "English",
+    "arabic": "Arabic"
+  },
+  "SignUp": {
+    "description": "Enter your information to create an account",
+    "title": "Sign Up",
+    "fullname": "Full name",
+    "fullnamePlaceholder": "John Doe",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "profileImage": "Profile Image (optional)",
+    "submit": "Create an account"
+  },
+  "SignIn": {
+    "title": "Sign In",
+    "description": "Enter your email below to login to your account",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "signIn": "Login",
+    "signInWithGoogle": "Sign in with Google",
+    "signInWithGithub": "Sign in with Github"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  }
+}
