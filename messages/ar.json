@@ -51,7 +51,8 @@
   "sidebar": {
     "familyTree": "شجرة العائلة",
     "members": "افراد العائلة",
-    "graph": "مخطط شجرة العائلة"
+    "graph": "مخطط شجرة العائلة",
+    "myFamily": "عائلتي"
   },
   "memberPage": {
     "Table": {
@@ -83,7 +84,9 @@
       "select-gender": "الجنس",
       "male": "ذكر",
       "female": "انثى",
-      "add-member": "اضف الفرد"
+      "add-member": "اضف الفرد",
+      "successfully-added-a-new-member": "تم اضافة فرد جديد بنجاح",
+      "something-went-wrong": "حدث خطاء"
     }
   },
   "general": {
@@ -114,5 +117,18 @@
     "no-families-found": "لا توجد عوائل....",
     "regenerate": "اعادة تحميل",
     "select-family": "اختر العائلة"
+  },
+  "AddFamilyCard": {
+    "select-gender": "الجنس",
+    "male": "ذكر",
+    "female": "انثى",
+    "family-name": "اسم العائلة",
+    "head-name": "اسم رئيس العائلة",
+    "add-family": "اضف العائلة"
+  },
+  "dashboardPage": {
+    "add-a-family": "اضف عائلة",
+    "add-a-new-famiy": "اضف عائلة جديدة",
+    "successfully-added-a-new-family": "تمت اضافة عائلة جديد بنجاح"
   }
 }

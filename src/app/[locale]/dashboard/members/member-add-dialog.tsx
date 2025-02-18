@@ -79,10 +79,10 @@ export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSu
                 mother_id: values.mother_id ?? null,
                 spouse_id: values.spouse_id ?? null
             }, familyId),
-        onError: () => toast.error("something went wrong"),
+        onError: () => toast.error(t('something-went-wrong')),
         onSuccess: () => {
             onSuccess?.();
-            toast.success('Successfully added a new member!')
+            toast.success(t('successfully-added-a-new-member'))
         },
     })
 

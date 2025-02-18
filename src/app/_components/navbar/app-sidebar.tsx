@@ -33,12 +33,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 isActive: true,
                 items: [
                     {
+                        title: t("myFamily"),
+                        url: "/dashboard/",
+                    },
+                    {
                         title: t("members"),
-                        url: "members",
+                        url: "/dashboard/members",
                     },
                     {
                         title: t("graph"),
-                        url: "tree",
+                        url: "/dashboard/tree",
                     }
                 ],
             },

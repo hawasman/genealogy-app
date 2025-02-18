@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client'
+import { FamilySelector } from "@/components/family-selector";
 import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { getFamilyNames } from "@/server/actions/family-actions";
 import generateFamilyTree from "@/server/actions/tree-actions";
 import { type FamilyTreeData, type FamilyTreeNode } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
@@ -17,24 +16,13 @@ export const FamilyTreeChart = () => {
     const t = useTranslations("treePage")
     const [familyId, setFamilyId] = useState(0);
     const { data: familyData, refetch, isLoading } = useQuery({ queryKey: ["generatedFamilyTree", familyId], queryFn: () => generateFamilyTree(familyId) });
-    const { data: familyNames, isLoading: isNamesLoading } = useQuery({ queryKey: ["familyNames"], queryFn: () => getFamilyNames() });
+
     if (isLoading) return <Loader />;
     return (
         <div className="flex flex-col w-full h-full">
             <div className="flex gap-4">
                 <Button onClick={() => refetch()}>{t('regenerate')}</Button>
-                <Select onValueChange={value => setFamilyId(parseInt(value))}>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder={t('select-family')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {isNamesLoading && <SelectItem value="0" disabled>{t('loading-names')}</SelectItem>}
-                        {!isNamesLoading && !familyNames && <SelectItem value="0" disabled>{t('no-families-found')}</SelectItem>}
-                        {!isNamesLoading &&
-                            familyNames?.map((family) => <SelectItem key={family.id} value={family.id.toString()}>{family.name}</SelectItem>)
-                        }
-                    </SelectContent>
-                </Select>
+                <FamilySelector onChange={value => setFamilyId(parseInt(value))} />
             </div>
             {familyData ? <FamilyTree familyData={familyData} /> :
                 <div className="flex content-center items-center justify-center ">

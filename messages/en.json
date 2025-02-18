@@ -51,7 +51,8 @@
   "sidebar": {
     "familyTree": "Family Tree",
     "members": "Members",
-    "graph": "Graph"
+    "graph": "Graph",
+    "myFamily": "My Family"
   },
   "memberPage": {
     "Table": {
@@ -85,7 +86,9 @@
       "select-gender": "Gender",
       "male": "Male",
       "female": "Female",
-      "add-member": "Add Member"
+      "add-member": "Add Member",
+      "successfully-added-a-new-member": "Successfully added a new member!",
+      "something-went-wrong": "something went wrong"
     }
   },
   "general": {
@@ -129,5 +132,26 @@
   "loading-names": "Loading Names...",
   "no-families-found": "No Families Found",
   "regenerate": "Regenerate",
-  "select-family": "Select family"
+  "select-family": "Select family",
+  "AddFamilyCard": {
+    "select-gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "family-name": "Family Name",
+    "head-name": "Head Name",
+    "add-family": "Add Family"
+  },
+  "family-name": "Family name",
+  "head-name": "Head name",
+  "add-family": "Add family",
+  "add-a-family": "Add a family",
+  "dashboardPage": {
+    "add-a-family": "Add a Family",
+    "add-a-new-famiy": "Add a new family",
+    "successfully-added-a-new-family": "Successfully added a new family"
+  },
+  "add-a-new-famiy": "add a new famiy",
+  "successfully-added-a-new-family": "Successfully added a new family!",
+  "successfully-added-a-new-member": "Successfully added a new member!",
+  "something-went-wrong": "something went wrong"
 }
