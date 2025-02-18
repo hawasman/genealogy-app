@@ -59,7 +59,7 @@ const formSchema = z.object({
 })
 export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSuccess?: () => void }) => {
     const locale = useLocale();
-    const t = useTranslations('MembersPage.addDialog');
+    const t = useTranslations('memberPage.addDialog');
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {

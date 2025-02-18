@@ -117,5 +117,17 @@
   "spouse": "Spouse",
   "search-spouse": "Search from member's spouse",
   "select-gender": "Select Gender",
-  "gender": "Gender"
+  "gender": "Gender",
+  "no-family-data": "No Family Data",
+  "treePage": {
+    "no-family-data": "No Family Data",
+    "loading-names": "Loading Names...",
+    "no-families-found": "no familes found...",
+    "regenerate": "Regenerate",
+    "select-family": "Select Family"
+  },
+  "loading-names": "Loading Names...",
+  "no-families-found": "No Families Found",
+  "regenerate": "Regenerate",
+  "select-family": "Select family"
 }

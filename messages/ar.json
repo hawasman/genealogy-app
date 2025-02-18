@@ -107,5 +107,12 @@
     "family-members": "افراد العائلة",
     "add-member": "اضف فرد جديد",
     "add-member-description": "اضف فرد جديد لشجرة عائلتك"
+  },
+  "treePage": {
+    "no-family-data": "لا توجد بيانات للعائلة",
+    "loading-names": "جاري تحميل الاسماء...",
+    "no-families-found": "لا توجد عوائل....",
+    "regenerate": "اعادة تحميل",
+    "select-family": "اختر العائلة"
   }
 }

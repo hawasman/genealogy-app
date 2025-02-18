@@ -2,68 +2,45 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 'use client'
+import { Loader } from "@/components/loader";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getFamilyNames } from "@/server/actions/family-actions";
+import generateFamilyTree from "@/server/actions/tree-actions";
 import { type FamilyTreeData, type FamilyTreeNode } from "@/utils/types";
+import { useQuery } from "@tanstack/react-query";
 import * as d3 from 'd3';
-import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
+import { useEffect, useRef, useState } from "react";
 
-const familyData: FamilyTreeData = {
-    familyName: "My Family",
-    familyHead: "الطيب",
-    members: [
-        {
-            id: 2,
-            name: "مجدي",
-            age: null,
-            gender: "male",
-            spouse: "سوزان",
-            fatherId: 1,
-            children: [
-                {
-                    id: 4,
-                    name: "محمد",
-                    age: null,
-                    gender: "male",
-                    spouse: "قنوت",
-                    fatherId: 2,
-                    children: [
-                        {
-                            id: 6,
-                            name: "جوانا",
-                            age: null,
-                            gender: "female",
-                            fatherId: 4,
-                            children: [
-                                {
-                                    id: 7,
-                                    name: "خالد",
-                                    age: null,
-                                    gender: "male",
-                                    children: [
-                                        {
-                                            id: 8,
-                                            name: "عمر",
-                                            age: null,
-                                            gender: "male",
-                                            fatherId: 7,
-                                            children: []
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-};
-
-export const FamilyTreeChart = ({ familyId }: { familyId: number }) => {
-    // const { data: familyData, refetch, isLoading } = useQuery({ queryKey: ["generatedFamilyTree", familyId], queryFn: () => generateFamilyTree(familyId) });
-    const svgRef = FamilyTree({ familyData });
+export const FamilyTreeChart = () => {
+    const t = useTranslations("treePage")
+    const [familyId, setFamilyId] = useState(0);
+    const { data: familyData, refetch, isLoading } = useQuery({ queryKey: ["generatedFamilyTree", familyId], queryFn: () => generateFamilyTree(familyId) });
+    const { data: familyNames, isLoading: isNamesLoading } = useQuery({ queryKey: ["familyNames"], queryFn: () => getFamilyNames() });
+    if (isLoading) return <Loader />;
     return (
-        <div className="flex w-full h-full">
-            {familyData && <FamilyTree familyData={familyData} />}
+        <div className="flex flex-col w-full h-full">
+            <div className="flex gap-4">
+                <Button onClick={() => refetch()}>{t('regenerate')}</Button>
+                <Select onValueChange={value => setFamilyId(parseInt(value))}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder={t('select-family')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {isNamesLoading && <SelectItem value="0" disabled>{t('loading-names')}</SelectItem>}
+                        {!isNamesLoading && !familyNames && <SelectItem value="0" disabled>{t('no-families-found')}</SelectItem>}
+                        {!isNamesLoading &&
+                            familyNames?.map((family) => <SelectItem key={family.id} value={family.id.toString()}>{family.name}</SelectItem>)
+                        }
+                    </SelectContent>
+                </Select>
+            </div>
+            {familyData ? <FamilyTree familyData={familyData} /> :
+                <div className="flex content-center items-center justify-center ">
+                    <p className="text-xl font-bold">{t('no-family-data')}</p>
+                </div>
+            }
         </div>
     );
 };

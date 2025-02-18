@@ -418,3 +418,14 @@ export async function getPaternalLineageNames(
   }));
   return formattedResult;
 }
+
+export const getFamilyNames = async () => {
+  const result = await db.query.families.findMany({
+    columns: {
+      id: true,
+      name: true,
+    },
+  });
+
+  return result;
+};

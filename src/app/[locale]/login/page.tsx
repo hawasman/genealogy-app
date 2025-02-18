@@ -6,9 +6,11 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs";
+import { redirectIfAuthenticated } from "@/server/actions/auth-actions";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function AuthPage() {
+    void redirectIfAuthenticated()
     const locale = useLocale();
     const t = useTranslations("auth");
     return (

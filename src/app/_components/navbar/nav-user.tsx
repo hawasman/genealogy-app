@@ -23,6 +23,7 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
+import { signOut } from "@/server/actions/auth-actions"
 import { type User } from "better-auth"
 import { useTranslations } from "next-intl"
 
@@ -32,10 +33,7 @@ export function NavUser({
     user: User
 }) {
     const { isMobile } = useSidebar()
-    const initials = user.name
-        .split(" ")
-        .map((name) => name[0])
-        .join("")
+    const initials = user?.name.match(/(^\S\S?|\s\S)?/g)?.map(v => v.trim()).join("").match(/(^\S|\S$)?/g)?.join("").toLocaleUpperCase()
     const t = useTranslations("auth")
     return (
         <SidebarMenu>
@@ -67,29 +65,9 @@ export function NavUser({
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        {/* <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <Sparkles />
-                                Upgrade to Pro
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                <BadgeCheck />
-                                Account
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Bell />
-                                Notifications
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator /> */}
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={async () => {
+                            await signOut()
+                        }}>
                             <LogOut />
                             {t("logout")}
                         </DropdownMenuItem>

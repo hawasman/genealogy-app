@@ -74,7 +74,7 @@ export function MemberDataTable<TData, TValue>({
                     ) : (
                         <TableRow>
                             <TableCell colSpan={columns.length} className="h-24 text-center">
-                                {t('treePage.Table.page.no-result')}
+                                {t('memberPage.Table.page.no-result')}
                             </TableCell>
                         </TableRow>
                     )}

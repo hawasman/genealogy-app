@@ -1,7 +1,18 @@
 import { AppSidebar } from "@/app/_components/navbar/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { redirect } from "@/i18n/routing";
+import { auth } from "@/server/auth";
+import { getLocale } from "next-intl/server";
+import { headers } from "next/headers";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+    const session = await auth.api.getSession({
+        headers: await headers()
+    })
+    if (!session) {
+        const locale = await getLocale()
+        redirect({ href: '/login', locale })
+    }
     return (
         <SidebarProvider>
             <AppSidebar />
