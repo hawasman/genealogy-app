@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
   const familyTree = await generateFamilyTreeByUserId();
 
-  if (!familyTree) return new Response(null, { status: 404 });
+  // if (!familyTree) return new Response(null, { status: 404 });
 
   const result = streamText({
     model: groq("llama-3.3-70b-versatile"),
