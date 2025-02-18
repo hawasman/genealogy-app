@@ -53,7 +53,7 @@
     "members": "افراد العائلة",
     "graph": "مخطط شجرة العائلة"
   },
-  "treePage": {
+  "memberPage": {
     "Table": {
       "Columns": {
         "name": "الاسم",
@@ -68,6 +68,22 @@
       "page": {
         "no-result": "لا توجد بيانات"
       }
+    },
+    "addDialog": {
+      "member-name": "اسم الفرد",
+      "enter-members-name": "ادخل اسم الفرد",
+      "enter-the-full-name-of-the-member": "ادخل الاسم الكامل للفرد بدون اسم الاب او العائلة ",
+      "father": "الاب",
+      "search-father": "ابحث عن اب الفرد",
+      "mother": "الام",
+      "search-mother": "ابحث عن ام الفرد",
+      "spouse": "الزوج/ة",
+      "search-spouse": "ابحث عن زوج/ة الفرد",
+      "gender": "الجنس",
+      "select-gender": "الجنس",
+      "male": "ذكر",
+      "female": "انثى",
+      "add-member": "اضف الفرد"
     }
   },
   "general": {
@@ -87,7 +103,7 @@
       "go-to-last-page": "الصحفة الاخيرة"
     }
   },
-  "TreePage": {
+  "MembersPage": {
     "family-members": "افراد العائلة",
     "add-member": "اضف فرد جديد",
     "add-member-description": "اضف فرد جديد لشجرة عائلتك"

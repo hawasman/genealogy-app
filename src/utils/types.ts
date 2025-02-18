@@ -53,8 +53,8 @@ export interface FamilyTreeNode {
   name: string;
   age: number | null; // Age can be null if not available
   gender: string;
-  spouse: string | null;
-  fatherId: number | null;
+  spouse?: string | null;
+  fatherId?: number | null;
   children: FamilyTreeNode[];
 }
 

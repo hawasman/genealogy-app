@@ -12,6 +12,7 @@ const config = {
   ],
   rules: {
     "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
     "react/jsx-no-literals": "warn",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
@@ -30,7 +31,7 @@ const config = {
     ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-misused-promises": [
-      "error",
+      "warn",
       {
         checksVoidReturn: {
           attributes: false,

@@ -53,7 +53,7 @@
     "members": "Members",
     "graph": "Graph"
   },
-  "treePage": {
+  "memberPage": {
     "Table": {
       "Columns": {
         "name": "Name",
@@ -70,7 +70,23 @@
       }
     },
     "family-members": "Family Members",
-    "add-member": "Add Member"
+    "add-member": "Add Member",
+    "addDialog": {
+      "member-name": "Member Name",
+      "enter-members-name": "Enter member's name",
+      "enter-the-full-name-of-the-member": "Enter the name of the member",
+      "father": "Father",
+      "search-father": "Search for member's father",
+      "mother": "Mother",
+      "search-mother": "Seach for member's mother",
+      "spouse": "Spouse",
+      "search-spouse": "Seach for member's spouse",
+      "gender": "Gender",
+      "select-gender": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "add-member": "Add Member"
+    }
   },
   "general": {
     "columnHeader": {
@@ -89,9 +105,17 @@
       "go-to-last-page": "Go to last page"
     }
   },
-  "TreePage": {
+  "MembersPage": {
     "family-members": "Family Members",
     "add-member": "Add a Member",
     "add-member-description": "Add a new member to your family"
-  }
+  },
+  "enter-the-full-name-of-the-member": "Enter the full name of the member.",
+  "search-father": "Search for member's father",
+  "mother": "Mother",
+  "search-mother": "Search for member's mother",
+  "spouse": "Spouse",
+  "search-spouse": "Search from member's spouse",
+  "select-gender": "Select Gender",
+  "gender": "Gender"
 }
