@@ -68,3 +68,4 @@ export const MemberRelations = relations(members, ({ one }) => ({
 export type FamilyType = typeof families.$inferSelect;
 export type FamilyInsertType = typeof families.$inferInsert;
 export type MemberType = typeof members.$inferSelect;
+export type createMemberType = typeof members.$inferInsert;
