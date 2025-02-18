@@ -7,7 +7,10 @@ import {
   type MemberWithChildren,
 } from "@/utils/types";
 import { eq, or, sql } from "drizzle-orm";
+import { headers } from "next/headers";
+import { auth } from "../auth";
 import { db } from "../db";
+import { user } from "../db/schema/auth-schema";
 import {
   families,
   members,
@@ -20,6 +23,10 @@ export const createFamily = async (
   headName: string,
   gender: string,
 ) => {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) {
+    throw new Error("No session");
+  }
   const result = await db.insert(families).values(family).returning();
   if (!result[0]) {
     throw new Error("No family created");
@@ -39,6 +46,10 @@ export const createFamily = async (
   }
 
   await db
+    .update(user)
+    .set({ mainFamilyId: result[0].id })
+    .where(eq(user.id, session.user.id));
+  await db
     .update(families)
     .set({ head_id: head[0].id })
     .where(eq(families.id, result[0].id));
@@ -55,6 +66,17 @@ export const getFamily = async (familyId: number) => {
 export const getFamilyMember = async (memberId: number) => {
   try {
     const result = await db.query.members.findFirst({
+      with: {
+        father: {
+          columns: { id: true, name: true },
+        },
+        mother: {
+          columns: { id: true, name: true },
+        },
+        spouse: {
+          columns: { id: true, name: true },
+        },
+      },
       where: eq(members.id, memberId),
     });
     return result;
@@ -142,17 +164,7 @@ export const createMember = async (
     }
     if (generation === 1) generation = mother.generation + 1;
   }
-  if (isNaN(spouse_id ?? NaN)) spouse_id = null;
-  if (spouse_id) {
-    const spouse = await getFamilyMember(spouse_id);
-    generation = Math.max(generation, spouse?.generation ?? 1);
-    if (!spouse?.spouse_id) {
-      await db
-        .update(members)
-        .set({ spouse_id: spouse_id })
-        .where(eq(members.id, spouse_id));
-    }
-  }
+
   try {
     const result = await db
       .insert(members)
@@ -166,6 +178,20 @@ export const createMember = async (
         spouse_id: spouse_id,
       })
       .returning();
+
+    if (!result[0]) throw new Error("No member created");
+
+    if (isNaN(spouse_id ?? NaN)) spouse_id = null;
+    if (spouse_id) {
+      const spouse = await getFamilyMember(spouse_id);
+      generation = Math.max(generation, spouse?.generation ?? 1);
+      if (!spouse?.spouse_id) {
+        await db
+          .update(members)
+          .set({ spouse_id: result[0].id })
+          .where(eq(members.id, spouse_id));
+      }
+    }
     return result[0];
   } catch (error) {
     console.log(error);
@@ -428,4 +454,60 @@ export const getFamilyNames = async () => {
   });
 
   return result;
+};
+
+export const userHasMemberId = async () => {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return false;
+  const userId = session.user.id;
+  const result = await db.query.user.findFirst({
+    where: eq(user.id, userId),
+  });
+  if (!result?.mainFamilyMemberId) return false;
+  const member = await getFamilyMember(result.mainFamilyMemberId);
+  return member ? true : false;
+};
+
+export const createUserMember = async ({
+  name,
+  father_id,
+  mother_id,
+  spouse_id,
+  gender,
+  family_id,
+}: createMemberType & { family_id: number }) => {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return false;
+  const userId = session.user.id;
+  const result = await createMember(
+    { name, father_id, mother_id, spouse_id, gender },
+    family_id,
+  );
+  console.log(result);
+
+  if (!result) throw new Error("No member created");
+  await db
+    .update(user)
+    .set({ mainFamilyMemberId: result.id })
+    .where(eq(user.id, userId));
+};
+
+export const getUserMemberInfo = async () => {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) throw new Error("Not Authenticated");
+  const userId = session.user.id;
+  const result = await db.query.user.findFirst({
+    where: eq(user.id, userId),
+  });
+  if (!result?.mainFamilyMemberId) return null;
+  const member = await getFamilyMember(result.mainFamilyMemberId);
+  return {
+    id: member?.id ?? null,
+    name: member?.name ?? null,
+    gender: member?.gender ?? null,
+    spouse: member?.spouse,
+    father: member?.father,
+    mother: member?.mother,
+    generation: member?.generation,
+  };
 };

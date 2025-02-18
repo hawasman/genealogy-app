@@ -1,7 +1,10 @@
 "use server";
 import { type FamilyTreeData, type FamilyTreeNode } from "@/utils/types";
 import { and, eq, isNotNull, ne, or } from "drizzle-orm";
+import { headers } from "next/headers";
+import { auth } from "../auth";
 import { db } from "../db";
+import { user } from "../db/schema/auth-schema";
 import { families, members } from "../db/schema/schema";
 
 async function generateFamilyTree(
@@ -147,5 +150,21 @@ async function generateFamilyTree(
     return null;
   }
 }
+
+export const generateFamilyTreeByUserId = async () => {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session) throw new Error("Not Authenticated");
+
+  const currentUser = await db.query.user.findFirst({
+    where: eq(user.id, session.user.id),
+  });
+
+  if (!currentUser) {
+    return null;
+  }
+
+  return await generateFamilyTree(currentUser.mainFamilyId ?? 0);
+};
 
 export default generateFamilyTree;

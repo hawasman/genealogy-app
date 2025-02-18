@@ -1,3 +1,4 @@
+import AIChat from "@/app/_components/ai-chat";
 import { AppSidebar } from "@/app/_components/navbar/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { redirect } from "@/i18n/routing";
@@ -24,6 +25,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
                 </header>
                 <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     {children}
+                </div>
+                <div>
+                    <AIChat />
                 </div>
             </SidebarInset>
         </SidebarProvider>

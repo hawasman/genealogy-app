@@ -1,4 +1,12 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import {
+  boolean,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
+import { families, members } from "./schema";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -6,6 +14,10 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").notNull(),
   image: text("image"),
+  mainFamilyId: integer("main_family_id").references(() => families.id),
+  mainFamilyMemberId: integer("main_family_member_id").references(
+    () => members.id,
+  ),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 });
@@ -49,3 +61,14 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+
+export const userRelations = relations(user, ({ one }) => ({
+  mainFamily: one(families, {
+    fields: [user.mainFamilyId],
+    references: [families.id],
+  }),
+  mainFamilyMember: one(members, {
+    fields: [user.mainFamilyMemberId],
+    references: [members.id],
+  }),
+}));

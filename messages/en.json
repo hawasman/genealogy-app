@@ -88,7 +88,8 @@
       "female": "Female",
       "add-member": "Add Member",
       "successfully-added-a-new-member": "Successfully added a new member!",
-      "something-went-wrong": "something went wrong"
+      "something-went-wrong": "something went wrong",
+      "this-is-me": "This is me."
     }
   },
   "general": {
@@ -153,5 +154,17 @@
   "add-a-new-famiy": "add a new famiy",
   "successfully-added-a-new-family": "Successfully added a new family!",
   "successfully-added-a-new-member": "Successfully added a new member!",
-  "something-went-wrong": "something went wrong"
+  "something-went-wrong": "something went wrong",
+  "write-a-message": "Write a message...",
+  "AiChat": {
+    "write-a-message": "Write a message...",
+    "send": "Send",
+    "cancel": "Cancel",
+    "copy": "Copy",
+    "refresh": "Refresh"
+  },
+  "send": "Send",
+  "copy": "Copy",
+  "refresh": "Refresh",
+  "this-is-me": "This is me."
 }

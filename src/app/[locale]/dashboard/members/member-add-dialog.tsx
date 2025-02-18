@@ -1,5 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -7,11 +8,12 @@ import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
-import { createMember, getPaternalLineageNames } from "@/server/actions/family-actions"
+import { createMember, createUserMember, getPaternalLineageNames, userHasMemberId } from "@/server/actions/family-actions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { Check } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
+import { useState } from "react"
 import { type Control, type FieldValues, useForm, type UseFormReturn } from "react-hook-form"
 import toast from "react-hot-toast"
 import { z } from "zod"
@@ -60,11 +62,16 @@ const formSchema = z.object({
 export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSuccess?: () => void }) => {
     const locale = useLocale();
     const t = useTranslations('memberPage.addDialog');
+    const [meCheckbox, setMeCheckbox] = useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
         },
+    })
+    const { data: hasMember } = useQuery({
+        queryKey: ["has-member"],
+        queryFn: () => userHasMemberId(),
     })
     const { data } = useQuery<{ name: string; gender: string; id: number }[]>({
         queryKey: ["fathers", familyId],
@@ -72,13 +79,27 @@ export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSu
     });
 
     const mutation = useMutation({
-        mutationFn: (values: z.infer<typeof formSchema>) => createMember(
-            {
-                ...values,
-                father_id: values.father_id ?? null,
-                mother_id: values.mother_id ?? null,
-                spouse_id: values.spouse_id ?? null
-            }, familyId),
+        mutationFn: async (values: z.infer<typeof formSchema>) => {
+            if (hasMember) {
+                const result = await createMember(
+                    {
+                        ...values,
+                        father_id: values.father_id ?? null,
+                        mother_id: values.mother_id ?? null,
+                        spouse_id: values.spouse_id ?? null
+                    }, familyId)
+                return result;
+            }
+            await createUserMember(
+                {
+                    ...values,
+                    father_id: values.father_id ?? null,
+                    mother_id: values.mother_id ?? null,
+                    spouse_id: values.spouse_id ?? null,
+                    family_id: familyId
+                }
+            )
+        },
         onError: () => toast.error(t('something-went-wrong')),
         onSuccess: () => {
             onSuccess?.();
@@ -88,7 +109,7 @@ export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSu
 
     const fathers = Array.isArray(data) ? data?.filter((f) => f.gender === "male").map((f) => ({ label: f.name, value: f.id })) : [];
     const mothers = Array.isArray(data) ? data?.filter((f) => f.gender === "female").map((f) => ({ label: f.name, value: f.id })) : [];
-    const spouses = Array.isArray(data) ? data?.filter((f) => f.gender === "female" && f.id !== form.getValues("mother_id")).map((f) => ({ label: f.name, value: f.id })) : [];
+    const spouses = Array.isArray(data) ? data?.filter((f) => f.id !== form.getValues("mother_id") && f.id !== form.getValues("father_id")).map((f) => ({ label: f.name, value: f.id })) : [];
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
@@ -104,6 +125,20 @@ export const MembersAddForm = ({ familyId, onSuccess }: { familyId: number, onSu
                     label={t('member-name')}
                     placeholder={t('enter-members-name')}
                 />
+                {!hasMember && (
+                    <div className="items-top flex gap-2">
+                        <Checkbox checked={meCheckbox}
+                            onCheckedChange={(e) => e ? setMeCheckbox(true) : setMeCheckbox(false)} />
+                        <div className="grid gap-2 leading-none">
+                            <label
+                                htmlFor="terms1"
+                                className="text-l font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            >
+                                {t('this-is-me')}
+                            </label>
+                        </div>
+                    </div>
+                )}
                 <div className="flex justify-between gap-2">
                     <div className="w-1/2">
                         <MembersComboBox

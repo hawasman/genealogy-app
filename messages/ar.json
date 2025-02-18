@@ -86,7 +86,8 @@
       "female": "انثى",
       "add-member": "اضف الفرد",
       "successfully-added-a-new-member": "تم اضافة فرد جديد بنجاح",
-      "something-went-wrong": "حدث خطاء"
+      "something-went-wrong": "حدث خطاء",
+      "this-is-me": " هذا انا. "
     }
   },
   "general": {
@@ -130,5 +131,12 @@
     "add-a-family": "اضف عائلة",
     "add-a-new-famiy": "اضف عائلة جديدة",
     "successfully-added-a-new-family": "تمت اضافة عائلة جديد بنجاح"
+  },
+  "AiChat": {
+    "write-a-message": "اكتب رسالة....",
+    "send": "ارسال",
+    "cancel": "الغاء",
+    "copy": "نسخ",
+    "refresh": "مرة اخرى"
   }
 }
