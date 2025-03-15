@@ -166,5 +166,8 @@
   "send": "Send",
   "copy": "Copy",
   "refresh": "Refresh",
-  "this-is-me": "This is me."
+  "this-is-me": "This is me.",
+  "TreePage": {
+    "family-tree": "Family Tree"
+  }
 }

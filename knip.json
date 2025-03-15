@@ -1,0 +1,7 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "ignore": ["src/env.js", "drizzle.config.ts", ".env", ".env.*"],
+  "entry": ["src/**/*.{ts,tsx,js,jsx}", "*.config.{ts,js}"],
+  "project": ["src/**/*.{ts,tsx,js,jsx}"],
+  "ignoreDependencies": ["@t3-oss/env-nextjs", "zod"]
+}

@@ -10,7 +10,7 @@
     "source.organizeImports": "always",
     "source.removeUnusedImports": "always"
   },
-  "cSpell.words": ["primereact", "unixepoch"],
+  "cSpell.words": ["primereact", "unixepoch", "xyflow"],
   "i18n-ally.localesPaths": ["messages", "src/i18n"],
   "i18n-ally.keystyle": "nested"
 }

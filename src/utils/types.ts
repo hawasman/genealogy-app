@@ -16,7 +16,7 @@ export interface FamilyMember {
   name: string;
   family_id: number;
   generation: number;
-  gender: string;
+  gender: "male" | "female";
   father_id: number | null;
   mother_id: number | null;
   spouse_id: number | null;
@@ -52,7 +52,7 @@ export interface FamilyTreeNode {
   id: number;
   name: string;
   age: number | null; // Age can be null if not available
-  gender: string;
+  gender: "male" | "female";
   spouse?: string | null;
   fatherId?: number | null;
   children: FamilyTreeNode[];
@@ -62,4 +62,14 @@ export interface FamilyTreeData {
   familyName: string;
   familyHead: string | null;
   members: FamilyTreeNode[];
+}
+
+export interface TreeNode {
+  id: string;
+  name: string;
+  type?: string;
+  children?: string[];
+  spouse?: string | null;
+  fatherId?: string | null;
+  gender?: "male" | "female";
 }
