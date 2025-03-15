@@ -89,7 +89,7 @@ async function generateFamilyTree(
           id: member.id,
           name: member.name,
           age: calculateAge(member),
-          gender: member.gender,
+          gender: member.gender as "male" | "female",
           spouse: member.spouse?.name ?? null,
           fatherId: member.father?.id ?? null,
           children: [],

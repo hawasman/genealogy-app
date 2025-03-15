@@ -1,6 +1,7 @@
 'use client'
 
 import { FamilySelector } from '@/components/family-selector';
+import { Loader } from '@/components/loader';
 import generateFamilyTree from '@/server/actions/tree-actions';
 import { useQuery } from '@tanstack/react-query';
 import '@xyflow/react/dist/style.css';
@@ -13,6 +14,11 @@ export default function TreePage() {
   const t = useTranslations('TreePage');
   const [familyId, setFamilyId] = useState<number>(0);
   const { data: familyData, isLoading } = useQuery({ queryKey: ["generatedFamilyTree", familyId], queryFn: () => generateFamilyTree(familyId) });
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="container h-screen w-screen">
       <div className="flex justify-between items-center">
