@@ -52,7 +52,9 @@
     "familyTree": "Family Tree",
     "members": "Members",
     "graph": "Graph",
-    "myFamily": "My Family"
+    "myFamily": "My Family",
+    "quiz": "Quiz",
+    "settings": "Settings"
   },
   "memberPage": {
     "Table": {

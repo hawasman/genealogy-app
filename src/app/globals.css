@@ -172,7 +172,3 @@
     mask-image: linear-gradient(to left, transparent 15%, black 100%);
   }
 }
-
-.react-flow__handle {
-  opacity: 0;
-}

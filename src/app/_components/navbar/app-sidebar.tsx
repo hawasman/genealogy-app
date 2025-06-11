@@ -43,6 +43,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {
                         title: t("graph"),
                         url: "/dashboard/tree",
+                    }, {
+                        title: t("quiz"),
+                        url: "/dashboard/quiz",
+                    },
+                    {
+                        title: t("settings"),
+                        url: "/dashboard/settings",
                     }
                 ],
             },

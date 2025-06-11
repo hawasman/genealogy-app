@@ -61,25 +61,27 @@ async function generateFamilyTree(
     const membersMap = new Map<number, FamilyTreeNode>();
 
     const calculateAge = (member: typeof members.$inferSelect) => {
-      // Example using birthdate, replace with your actual logic
-      // if (member.birthdate) {
-      //   const birthDate = new Date(member.birthdate);
-      //   const today = new Date();
-      //   let age = today.getFullYear() - birthDate.getFullYear();
-      //   const month = today.getMonth() - birthDate.getMonth();
-      //   if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      //     age--;
-      //   }
-      //   return age;
-      // }
-      return null; // Replace with your age calculation logic
+      if (member.birthdate) {
+        const birthDate = new Date(member.birthdate);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const month = today.getMonth() - birthDate.getMonth();
+        if (
+          month < 0 ||
+          (month === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+        return age;
+      }
+      return null;
     };
 
     // Create member nodes and store them in the map, handling duplicates and spouses
-    const processedMembers = new Set<string>(); // Keep track of processed members (by name)
+    const processedMembers = new Set<string>();
 
     for (const member of membersData) {
-      const memberKey = `${member.id}-${member.family_id}`; // Unique key for each member in a family
+      const memberKey = `${member.id}-${member.family_id}`;
 
       if (!processedMembers.has(memberKey)) {
         // Skip if already processed
